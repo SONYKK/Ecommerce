@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ItemDetailPageSchema } from '../types/ItemDetailPageSchema';
 
 const initialState: ItemDetailPageSchema = {
-    
+
 };
 
 export const ItemDetailPageSlice = createSlice({
@@ -10,7 +10,7 @@ export const ItemDetailPageSlice = createSlice({
     initialState,
     reducers: {
         template: (state, action: PayloadAction<string>) => {
-           
+
         },
     },
     // extraReducers: (builder) => {

@@ -6,7 +6,6 @@ import ProfileIcon from 'shared/assets/icons/profile-20-20.svg';
 import ListIcon from 'shared/assets/icons/list-24-24.svg';
 import { SidebarItemType } from '../types/sidebar';
 
-
 export const getSidebarItems = createSelector(
     getUserAuthData,
     (userData) => {
@@ -15,18 +14,15 @@ export const getSidebarItems = createSelector(
                 path: RoutePath.main,
                 Icon: MainIcon,
                 text: 'Главная',
+                authOnly: false,
             },
             {
                 path: RoutePath.catalog,
                 Icon: ListIcon,
                 text: 'Каталог',
+                authOnly: false,
             },
-            {
-                path: RoutePath.articles,
-                Icon: ListIcon,
-                text: 'Статьи',
-            },
-            
+
         ];
 
         if (userData) {
@@ -37,7 +33,12 @@ export const getSidebarItems = createSelector(
                     text: 'Профиль',
                     authOnly: true,
                 },
-
+                {
+                    path: RoutePath.articles,
+                    Icon: ListIcon,
+                    text: 'Статьи',
+                    authOnly: true,
+                },
             );
         }
 

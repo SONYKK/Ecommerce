@@ -1,24 +1,23 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import cls from './CatalogItem.module.scss';
-import {memo, useEffect} from 'react';
-import {DynamicModuleLoader, ReducersList} from "shared/lib/components/DynamicModuleLoader/DynamicModuleLoader";
-import {CatalogItemReducer} from "../../model/slices/CatalogItemSlice";
-import {useAppDispatch} from "shared/lib/hooks/useAppDispatch/useAppDispatch";
-import {fetchCatalogItemById} from "entities/CatalogItem/model/services/fetchCatalogItemById/fetchCatalogItemById";
-import {useSelector} from "react-redux";
+import { memo, useCallback, useEffect } from 'react';
+import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { fetchCatalogItemById } from 'entities/CatalogItem/model/services/fetchCatalogItemById/fetchCatalogItemById';
+import { useSelector } from 'react-redux';
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
+import { Text, TextAlign, TextSize } from 'shared/ui/Text/Text';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import Some from '../../../../shared/assets/icons/funny-cooperation.jpg';
 import {
     getCatalogItemData,
     getCatalogItemError,
-    getCatalogItemIsLoading
-} from "../../model/selectors/CatalogItem";
-import {Skeleton} from "shared/ui/Skeleton/Skeleton";
-import {Text, TextAlign, TextSize} from "shared/ui/Text/Text";
-import {Avatar} from "shared/ui/Avatar/Avatar";
-import {Icon} from "shared/ui/Icon/Icon";
-import EyeIcon from "shared/assets/icons/eye-20-20.svg";
-import CalendarIcon from "shared/assets/icons/calendar-20-20.svg";
-import Some from '../../../../shared/assets/icons/funny-cooperation.jpg'
+    getCatalogItemIsLoading,
+} from '../../model/selectors/CatalogItem';
+import { CatalogItemReducer } from '../../model/slices/CatalogItemSlice';
+import cls from './CatalogItem.module.scss';
 
 interface CatalogItemProps {
     className?: string;
@@ -30,18 +29,22 @@ export const CatalogItem = memo((props: CatalogItemProps) => {
     const { t } = useTranslation('catalogItem');
     const reducers: ReducersList = {
         catalogItem: CatalogItemReducer,
-    }
+    };
     const dispatch = useAppDispatch();
     const isLoading = useSelector(getCatalogItemIsLoading);
     const error = useSelector(getCatalogItemError);
     const catalogItem = useSelector(getCatalogItemData);
-    
-    useEffect(()=> {
-        dispatch(fetchCatalogItemById(id))
-    }, [dispatch, id])
-    
+    const navigate = useNavigate();
+
+    const onBackToList = useCallback(() => {
+        navigate(RoutePath.catalog);
+    }, [navigate]);
+
+    useEffect(() => {
+        dispatch(fetchCatalogItemById(id));
+    }, [dispatch, id]);
+
     let content;
-    
     if (isLoading) {
         content = (
             <>
@@ -63,12 +66,14 @@ export const CatalogItem = memo((props: CatalogItemProps) => {
         content = (
             <>
                 <div className={cls.avatarWrapper}>
-                    {/*<Avatar*/}
-                    {/*    size={600}*/}
-                    {/*    // src={catalogItem?.img}*/}
-                    {/*    src={Some}*/}
-                    {/*    className={cls.image}*/}
-                    {/*/>*/}
+                    <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList} title="Go back" />
+                    {/* <Avatar */}
+                    {/*    size={600} */}
+                    {/*    // src={catalogItem?.img} */}
+                    {/*    src={Some} */}
+                    {/*    className={cls.image} */}
+                    {/* /> */}
+                    {/* eslint-disable-next-line jsx-a11y/alt-text */}
                     <img
                         src={Some}
                         className={cls.image}
@@ -82,21 +87,19 @@ export const CatalogItem = memo((props: CatalogItemProps) => {
                         size={TextSize.M}
                     />
                     <Text text={catalogItem?.description} />
-                    <Text text={`${catalogItem?.price} руб.`} size={TextSize.L}/>
+                    <Text text={`${catalogItem?.price} руб.`} size={TextSize.L} />
                 </div>
 
-                
             </>
         );
     }
-    
-    
+
     return (
-        <DynamicModuleLoader reducers={reducers} removeAfterUnmount={true}>
+        <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <div className={classNames(cls.CatalogItem, {}, [className])}>
                 {content}
             </div>
         </DynamicModuleLoader>
-        
+
     );
 });

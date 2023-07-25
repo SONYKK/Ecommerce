@@ -6,11 +6,11 @@ import { ProfilePage } from 'pages/ProfilePage';
 import { ArticlesPage } from 'pages/ArticlesPage';
 import { ArticleDetailsPage } from 'pages/ArticleDetailsPage';
 import { ArticleEditPage } from 'pages/ArticleEditPage';
-import {DeliveryPage} from "pages/DeliveryPage";
-import {CooperationPage} from "pages/CooperationPage";
-import {KontaktPage} from "pages/KontaktPage";
-import {CatalogPage} from "pages/CatalogPage";
-import {ItemDetailPage} from "pages/ItemDetailPage";
+import { DeliveryPage } from 'pages/DeliveryPage';
+import { CooperationPage } from 'pages/CooperationPage';
+import { KontaktPage } from 'pages/KontaktPage';
+import { CatalogPage } from 'pages/CatalogPage';
+import { ItemDetailPage } from 'pages/ItemDetailPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;

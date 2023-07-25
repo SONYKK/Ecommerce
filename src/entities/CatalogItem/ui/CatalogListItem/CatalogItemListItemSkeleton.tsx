@@ -2,8 +2,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
 import { Card } from 'shared/ui/Card/Card';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
+import { CatalogItemView } from 'entities/CatalogItem/model/types/CatalogItemSchema';
 import cls from './CatalogItemListItem.module.scss';
-import {CatalogItemView} from "entities/CatalogItem/model/types/CatalogItemSchema";
 
 interface CatalogItemListItemSkeletonProps {
     className?: string;

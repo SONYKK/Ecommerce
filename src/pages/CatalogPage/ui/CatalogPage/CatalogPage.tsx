@@ -1,23 +1,25 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import cls from './CatalogPage.module.scss';
-import {memo, useCallback, useEffect} from 'react';
-import {CatalogItemList} from "entities/CatalogItem/ui/CatalogItemList/CatalogItemList";
-import {DynamicModuleLoader, ReducersList} from "shared/lib/components/DynamicModuleLoader/DynamicModuleLoader";
-import {useAppDispatch} from "shared/lib/hooks/useAppDispatch/useAppDispatch";
-import {useSelector} from "react-redux";
-import {useParams, useSearchParams} from "react-router-dom";
-import {Page} from "widgets/Page/Page";
-import {CatalogPageReducer, getCatalogItems} from "pages/CatalogPage/model/slices/CatalogPageSlice";
+import { memo, useCallback } from 'react';
+import { CatalogItemList } from 'entities/CatalogItem/ui/CatalogItemList/CatalogItemList';
+import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { Page } from 'widgets/Page/Page';
+import { CatalogPageActions, CatalogPageReducer, getCatalogItems } from 'pages/CatalogPage/model/slices/CatalogPageSlice';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { CatalogViewSelector } from 'features/CatalogViewSelector/CatalogViewSelector';
+import { CatalogItemView } from 'entities/CatalogItem/model/types/CatalogItemSchema';
+import { fetchCatalogPage } from '../../model/services/fetchCatalogPage';
 import {
-    getCatalogPageError,
+    getCatalogPageHasMore,
+    getCatalogPageInited,
     getCatalogPageIsLoading,
-    getCatalogPageView
-} from "../../model/selectors/catalogPageSelectors";
-import {fetchCatalogItemById} from "entities/CatalogItem/model/services/fetchCatalogItemById/fetchCatalogItemById";
-import {useInitialEffect} from "shared/lib/hooks/useInitialEffect/useInitialEffect";
-import {fetchCatalogPage} from "pages/CatalogPage/model/services/fetchCatalogPage";
-
+    getCatalogPageNum,
+    getCatalogPageView,
+} from '../../model/selectors/catalogPageSelectors';
+import cls from './CatalogPage.module.scss';
 
 interface CatalogPageProps {
     className?: string;
@@ -32,34 +34,44 @@ export const CatalogPage = memo((props: CatalogPageProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const catalog = useSelector(getCatalogItems.selectAll);
-    const { id } = useParams<{id:string}>()
     const isLoading = useSelector(getCatalogPageIsLoading);
     const view = useSelector(getCatalogPageView);
     const [searchParams] = useSearchParams();
-    
-  
-    // const onLoadNextPart = useCallback(() => {
-    //     dispatch(fetchNextArticlesPage());
-    // }, [dispatch]);
-    //
+    const page = useSelector(getCatalogPageNum);
+    const hasMore = useSelector(getCatalogPageHasMore);
+    const inited = useSelector(getCatalogPageInited);
+
+    const onLoadNextPart = useCallback(() => {
+        if (hasMore && !isLoading) {
+            dispatch(CatalogPageActions.setPage(page + 1));
+            dispatch(fetchCatalogPage(String(page + 1)));
+        }
+    }, [dispatch, page, hasMore, isLoading]);
+
     useInitialEffect(() => {
-        dispatch(fetchCatalogPage('1'));
+        if (!inited) {
+            dispatch(CatalogPageActions.initState());
+            dispatch(fetchCatalogPage('1'));
+        }
     });
-    
+    const onChangeView = useCallback((view:CatalogItemView) => {
+        dispatch(CatalogPageActions.setView(view));
+    }, [dispatch]);
+
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
             <Page
-                // onScrollEnd={onLoadNextPart}
+                onScrollEnd={onLoadNextPart}
                 className={classNames(cls.ArticlesPage, {}, [className])}
             >
-                {console.log(catalog)}
+                <CatalogViewSelector view={view} onViewClick={onChangeView} />
                 <CatalogItemList
                     isLoading={isLoading}
-                    // view={view}
+                    view={view}
                     catalogItem={catalog}
                     className={cls.list}
-                    target={"_blank"}
-                    
+                    target="_blank"
+
                 />
             </Page>
         </DynamicModuleLoader>

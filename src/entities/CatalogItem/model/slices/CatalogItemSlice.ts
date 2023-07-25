@@ -1,13 +1,13 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CatalogItem, CatalogItemSchema} from '../types/CatalogItemSchema';
-import {fetchCatalogItemById} from "../services/fetchCatalogItemById/fetchCatalogItemById";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CatalogItem, CatalogItemSchema } from '../types/CatalogItemSchema';
+import { fetchCatalogItemById } from '../services/fetchCatalogItemById/fetchCatalogItemById';
 
 const initialState: CatalogItemSchema = {
     isLoading: false,
     data: undefined,
     error: undefined,
     ids: [],
-    entities: {}
+    entities: {},
 };
 
 export const CatalogItemSlice = createSlice({
@@ -20,8 +20,10 @@ export const CatalogItemSlice = createSlice({
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(fetchCatalogItemById.fulfilled, (state,
-                                                      action: PayloadAction<CatalogItem>,) => {
+            .addCase(fetchCatalogItemById.fulfilled, (
+                state,
+                action: PayloadAction<CatalogItem>,
+            ) => {
                 state.isLoading = false;
                 state.data = action.payload;
             })

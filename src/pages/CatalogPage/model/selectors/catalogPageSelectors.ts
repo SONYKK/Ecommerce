@@ -1,6 +1,6 @@
 import { StateSchema } from 'app/providers/StoreProvider';
-import {CatalogItemSortField, CatalogItemView} from "entities/CatalogItem/model/types/CatalogItemSchema";
-import {TypeOfDevice} from "shared/types";
+import { CatalogItemSortField, CatalogItemView } from 'entities/CatalogItem/model/types/CatalogItemSchema';
+import { TypeOfDevice } from 'shared/types';
 
 export const getCatalogPageIsLoading = (state: StateSchema) => state.catalogPage?.isLoading || false;
 export const getCatalogPageError = (state: StateSchema) => state.catalogPage?.error;

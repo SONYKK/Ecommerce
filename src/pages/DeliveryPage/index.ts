@@ -1,3 +1,3 @@
 export {
-    DeliveryPageAsync as DeliveryPage
-} from './ui/DeliveryPage.async'
+    DeliveryPageAsync as DeliveryPage,
+} from './ui/DeliveryPage.async';

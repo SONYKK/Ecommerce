@@ -4,10 +4,10 @@ import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { useSelector } from 'react-redux';
+import { TypeOfDevice } from 'shared/types';
 import cls from './Sidebar.module.scss';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { getSidebarItems } from '../../model/selectors/getSidebarItems';
-import {TypeOfDevice} from "shared/types";
 
 interface SidebarProps {
     className?: string;
@@ -28,7 +28,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             key={item.path}
         />
     )), [collapsed, sidebarItemsList]);
-    
+
     const categoryList = useMemo(() => sidebarItemsList.map((item) => (
         <SidebarItem
             item={item}
@@ -36,7 +36,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             key={item.path}
         />
     )), [collapsed, sidebarItemsList]);
-    
+
     return (
         <menu
             data-testid="sidebar"
@@ -55,8 +55,8 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             <div className={cls.items}>
                 {itemsList}
             </div>
-            <label>
-                <div className={classNames(cls.items, { [cls.collapsed]: collapsed }) }>
+            <div>
+                <div className={classNames(cls.items, { [cls.collapsed]: collapsed })}>
                     {TypeOfDevice.SERVER}
                 </div>
                 <div className={cls.items}>
@@ -80,7 +80,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                 <div className={cls.items}>
                     {TypeOfDevice.LIBS}
                 </div>
-            </label>
+            </div>
 
             <div className={cls.switchers}>
                 <ThemeSwitcher />

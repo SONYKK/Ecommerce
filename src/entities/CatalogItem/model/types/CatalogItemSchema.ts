@@ -1,12 +1,5 @@
-import {Brand, TypeOfDevice} from "shared/types";
-import {EntityState} from "@reduxjs/toolkit";
-
-export interface CatalogItemSchema extends EntityState<CatalogItem> {
-    isLoading: boolean;
-    error?: string;
-    data?: CatalogItem;
-    
-}
+import { Brand, TypeOfDevice } from 'shared/types';
+import { EntityState } from '@reduxjs/toolkit';
 
 export interface CatalogItem {
     id: string;
@@ -16,6 +9,12 @@ export interface CatalogItem {
     price: number;
     type: TypeOfDevice;
     brand: Brand;
+}
+
+export interface CatalogItemSchema extends EntityState<CatalogItem> {
+    isLoading: boolean;
+    error?: string;
+    data?: CatalogItem;
 }
 
 export enum CatalogItemView {

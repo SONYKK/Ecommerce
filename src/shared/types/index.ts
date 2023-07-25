@@ -50,4 +50,3 @@ export enum Cartridges {
     LTO8='LTO-8 Ultrium (12/30TB)',
     LTO9='TO-9 Ultrium (18/45TB)'
 }
-

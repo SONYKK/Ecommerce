@@ -17,9 +17,9 @@ import {
 import { AddCommentFormSchema } from 'features/addCommentForm';
 import { ArticlesPageSchema } from 'pages/ArticlesPage';
 import { UISchema } from 'features/UI';
-import {CatalogItemSchema} from "entities/CatalogItem";
-import {CatalogPageReducer} from "pages/CatalogPage/model/slices/CatalogPageSlice";
-import {CatalogPageSchema} from "pages/CatalogPage";
+import { CatalogItemSchema } from 'entities/CatalogItem';
+import { CatalogPageReducer } from 'pages/CatalogPage/model/slices/CatalogPageSlice';
+import { CatalogPageSchema } from 'pages/CatalogPage';
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -35,7 +35,7 @@ export interface StateSchema {
     articleDetailsPage?: ArticleDetailsPageSchema;
     articlesPage?: ArticlesPageSchema;
     catalogItem?: CatalogItemSchema;
-  
+
 }
 
 export type StateSchemaKey = keyof StateSchema;

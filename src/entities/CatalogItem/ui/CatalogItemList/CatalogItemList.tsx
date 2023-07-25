@@ -1,13 +1,11 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { HTMLAttributeAnchorTarget, memo } from 'react';
-import { ArticleListItemSkeleton } from 'entities/Article/ui/ArticleListItem/ArticleListItemSkeleton';
 import { Text, TextSize } from 'shared/ui/Text/Text';
 import { CatalogItemListItem } from '../CatalogListItem/CatalogItemListItem';
 import cls from './CatalogItemList.module.scss';
-import {CatalogItem, CatalogItemView} from "entities/CatalogItem/model/types/CatalogItemSchema";
-import {CatalogItemListItemSkeleton} from "entities/CatalogItem/ui/CatalogListItem/CatalogItemListItemSkeleton";
-
+import { CatalogItem, CatalogItemView } from '../../model/types/CatalogItemSchema';
+import { CatalogItemListItemSkeleton } from '../../ui/CatalogListItem/CatalogItemListItemSkeleton';
 
 interface CatalogItemListProps {
     className?: string;

@@ -1,3 +1,3 @@
 export {
-    KontaktPageAsync as KontaktPage
-} from './ui/KontaktPage.async'
+    KontaktPageAsync as KontaktPage,
+} from './ui/KontaktPage.async';

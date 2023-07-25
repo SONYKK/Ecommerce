@@ -8,8 +8,8 @@ import { getUserAuthData, userActions } from 'entities/User';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import Icon from 'shared/assets/icons/logo.svg';
 import cls from './Navbar.module.scss';
-import Icon from 'shared/assets/icons/logo.svg'
 
 interface NavbarProps {
     className?: string;
@@ -62,20 +62,20 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 
     return (
         <header className={classNames(cls.Navbar, {}, [className])}>
-          <Icon/>
-          {/*  <img alt={'Rodonit Group'} src='../../../shared/assets/icons/rodonit-icon_2.png'></img>*/}
-          <Text
-            className={cls.appName}
-            title={t('Rodonit Group')}
-            theme={TextTheme.INVERTED}
-          />
-          <AppLink
-            to={RoutePath.about}
-            theme={AppLinkTheme.SECONDARY}
-            className={cls.links}
-          >
-            {t('О компании')}
-          </AppLink>
+            <Icon />
+            {/*  <img alt={'Rodonit Group'} src='../../../shared/assets/icons/rodonit-icon_2.png'></img> */}
+            <Text
+                className={cls.appName}
+                title={t('Rodonit Group')}
+                theme={TextTheme.INVERTED}
+            />
+            <AppLink
+                to={RoutePath.about}
+                theme={AppLinkTheme.SECONDARY}
+                className={cls.links}
+            >
+                {t('О компании')}
+            </AppLink>
             <AppLink
                 to={RoutePath.delivery}
                 theme={AppLinkTheme.SECONDARY}
@@ -97,29 +97,33 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             >
                 {t('Контакты')}
             </AppLink>
-    
-            {authData ?
-                <Button
-                theme={ButtonTheme.CLEAR_INVERTED}
-                className={cls.links}
-                onClick={onLogout}
-            >
-                {t('Выйти')}
-            </Button>
-                :
-                <Button
-                theme={ButtonTheme.CLEAR_INVERTED}
-                className={cls.links}
-                onClick={onShowModal}
-            >
-                {t('Войти')}
-            </Button>}
-            
+
+            {authData
+                ? (
+                    <Button
+                        theme={ButtonTheme.CLEAR_INVERTED}
+                        className={cls.links}
+                        onClick={onLogout}
+                    >
+                        {t('Выйти')}
+                    </Button>
+                )
+                : (
+                    <Button
+                        theme={ButtonTheme.CLEAR_INVERTED}
+                        className={cls.links}
+                        onClick={onShowModal}
+                    >
+                        {t('Войти')}
+                    </Button>
+                )}
+
             {isAuthModal && (
                 <LoginModal
                     isOpen={isAuthModal}
                     onClose={onCloseModal}
                 />
             )}
-        </header>)})
-    
+        </header>
+    );
+});
