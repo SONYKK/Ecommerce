@@ -7,8 +7,7 @@ import {
 import { CombinedState } from 'redux';
 import { ProfileSchema } from 'entities/Profile';
 import { AxiosInstance } from 'axios';
-import { To } from 'history';
-import { NavigateOptions } from 'react-router';
+
 import { ArticleDetailsSchema } from 'entities/Article';
 import {
     ArticleDetailsCommentsSchema,
@@ -18,6 +17,9 @@ import {
 import { AddCommentFormSchema } from 'features/addCommentForm';
 import { ArticlesPageSchema } from 'pages/ArticlesPage';
 import { UISchema } from 'features/UI';
+import {CatalogItemSchema} from "entities/CatalogItem";
+import {CatalogPageReducer} from "pages/CatalogPage/model/slices/CatalogPageSlice";
+import {CatalogPageSchema} from "pages/CatalogPage";
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -29,8 +31,11 @@ export interface StateSchema {
     profile?: ProfileSchema;
     articleDetails?: ArticleDetailsSchema;
     addCommentForm?: AddCommentFormSchema;
-    articlesPage?: ArticlesPageSchema;
+    catalogPage?: CatalogPageSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
+    articlesPage?: ArticlesPageSchema;
+    catalogItem?: CatalogItemSchema;
+  
 }
 
 export type StateSchemaKey = keyof StateSchema;

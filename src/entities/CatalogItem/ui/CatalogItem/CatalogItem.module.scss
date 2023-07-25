@@ -1,0 +1,31 @@
+.CatalogItem {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image {
+
+  margin-top: 10px;
+  margin-left: 20px;
+  border-radius: 5%;
+  overflow: auto;
+  object-fit: contain;
+}
+
+.avatarWrapper {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  border: 2px dotted black;
+}
+
+.title {
+  margin-bottom: 50px;
+
+}
+
+.articleInfo {
+  margin-top: 200px;
+  margin-left: 50px;
+
+}

@@ -21,6 +21,11 @@ export const getSidebarItems = createSelector(
                 Icon: ListIcon,
                 text: 'Каталог',
             },
+            {
+                path: RoutePath.articles,
+                Icon: ListIcon,
+                text: 'Статьи',
+            },
             
         ];
 

@@ -33,32 +33,32 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         dispatch(userActions.logout());
     }, [dispatch]);
 
-    if (authData) {
-        return (
-            <header className={classNames(cls.Navbar, {}, [className])}>
-    //
-              {/*<Text*/}
-    {/*//                 className={cls.appName}*/}
-    {/*//                 title={t('Ulbi TV App')}*/}
-    {/*//                 theme={TextTheme.INVERTED}*/}
-    {/*//             />*/}
-    {/*//             <AppLink*/}
-    {/*//                 to={RoutePath.article_create}*/}
-    {/*//                 theme={AppLinkTheme.SECONDARY}*/}
-    {/*//                 className={cls.createBtn}*/}
-    {/*//             >*/}
-    {/*//                 {t('Создать статью')}*/}
-    {/*//             </AppLink>*/}
-                <Button
-                    theme={ButtonTheme.CLEAR_INVERTED}
-                    className={cls.links}
-                    onClick={onLogout}
-                >
-                    {t('Выйти')}
-                </Button>
-            </header>
-        );
-    }
+    // if (authData) {
+    //     return (
+    //         <header className={classNames(cls.Navbar, {}, [className])}>
+    // //
+    //           {/*<Text*/}
+    // {/*//                 className={cls.appName}*/}
+    // {/*//                 title={t('Ulbi TV App')}*/}
+    // {/*//                 theme={TextTheme.INVERTED}*/}
+    // {/*//             />*/}
+    // {/*//             <AppLink*/}
+    // {/*//                 to={RoutePath.article_create}*/}
+    // {/*//                 theme={AppLinkTheme.SECONDARY}*/}
+    // {/*//                 className={cls.createBtn}*/}
+    // {/*//             >*/}
+    // {/*//                 {t('Создать статью')}*/}
+    // {/*//             </AppLink>*/}
+    //             <Button
+    //                 theme={ButtonTheme.CLEAR_INVERTED}
+    //                 className={cls.links}
+    //                 onClick={onLogout}
+    //             >
+    //                 {t('Выйти')}
+    //             </Button>
+    //         </header>
+    //     );
+    // }
 
     return (
         <header className={classNames(cls.Navbar, {}, [className])}>
@@ -97,13 +97,24 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             >
                 {t('Контакты')}
             </AppLink>
-          <Button
+    
+            {authData ?
+                <Button
+                theme={ButtonTheme.CLEAR_INVERTED}
+                className={cls.links}
+                onClick={onLogout}
+            >
+                {t('Выйти')}
+            </Button>
+                :
+                <Button
                 theme={ButtonTheme.CLEAR_INVERTED}
                 className={cls.links}
                 onClick={onShowModal}
             >
                 {t('Войти')}
-            </Button>
+            </Button>}
+            
             {isAuthModal && (
                 <LoginModal
                     isOpen={isAuthModal}

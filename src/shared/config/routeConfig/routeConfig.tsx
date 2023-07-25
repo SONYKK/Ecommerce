@@ -10,6 +10,7 @@ import {DeliveryPage} from "pages/DeliveryPage";
 import {CooperationPage} from "pages/CooperationPage";
 import {KontaktPage} from "pages/KontaktPage";
 import {CatalogPage} from "pages/CatalogPage";
+import {ItemDetailPage} from "pages/ItemDetailPage";
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -27,6 +28,7 @@ export enum AppRoutes {
     COOPERATION = 'cooperation',
     KONTAKT = 'kontakt',
     CATALOG = 'catalog',
+    ITEM_DETAIL = 'item_detail',
     // last
     NOT_FOUND = 'not_found',
 }
@@ -43,6 +45,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.COOPERATION]: '/cooperation',
     [AppRoutes.KONTAKT]: '/kontakt',
     [AppRoutes.CATALOG]: '/catalog',
+    [AppRoutes.ITEM_DETAIL]: '/catalog/', // + :id
     // последний
     [AppRoutes.NOT_FOUND]: '*',
 };
@@ -64,12 +67,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ARTICLES]: {
         path: RoutePath.articles,
         element: <ArticlesPage />,
-        authOnly: true,
     },
     [AppRoutes.ARTICLE_DETAILS]: {
         path: `${RoutePath.article_details}:id`,
         element: <ArticleDetailsPage />,
-        authOnly: true,
     },
     [AppRoutes.ARTICLE_CREATE]: {
         path: `${RoutePath.article_create}`,
@@ -97,9 +98,14 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.catalog,
         element: <CatalogPage />,
     },
+    [AppRoutes.ITEM_DETAIL]: {
+        path: `${RoutePath.item_detail}:id`,
+        element: <ItemDetailPage />,
+    },
     // last
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath.not_found,
         element: <NotFoundPage />,
     },
+
 };

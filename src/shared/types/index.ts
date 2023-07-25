@@ -1,6 +1,6 @@
 export type SortOrder = 'asc' | 'desc';
 
-export const enum Brand {
+export enum Brand {
     DELL= 'DELL Technologies',
     HPE= 'HPE (Hewlett Packard Enterprise)',
     IBM='IBM',
@@ -15,7 +15,7 @@ export const enum Brand {
     YEALINK='YEALINK'
 }
 
-export const enum TypeOfDevice {
+export enum TypeOfDevice {
     SERVER='Серверные платформы',
     LIBS='Ленточные библиотеки',
     CARTRIDGES='Ленточный носители LTO (картриджи)',
@@ -32,7 +32,7 @@ export const enum TypeOfDevice {
     COMPONENTS='Комплектующие'
 }
 
-export const enum Strimers {
+export enum Strimers {
     LTO5='Стримеры LTO-5',
     LTO6='Стримеры LTO-6',
     LTO7='Стримеры LTO-7',
@@ -40,7 +40,7 @@ export const enum Strimers {
     LTO9='Стримеры LTO-9'
 }
 
-export const enum Cartridges {
+export enum Cartridges {
     CLEAN='Чистящие картриджи',
     LTO3='LTO-3 (400/800ГБ)',
     LTO4='LTO-4 Ultrium (0,8/1,6TB)',

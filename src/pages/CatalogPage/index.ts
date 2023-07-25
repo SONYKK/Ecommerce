@@ -1,1 +1,2 @@
-export { CatalogPageAsync as CatalogPage} from './ui/CatalogPage.async'
+export { CatalogPage } from './ui/CatalogPage/CatalogPage';
+export { CatalogPageSchema } from './model/types/CatalogPageSchema';
